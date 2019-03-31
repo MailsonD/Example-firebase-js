@@ -130,6 +130,15 @@
       database.ref('mensagens/' + chaveMensagem).set({
         texto : msg
       });
+      ler(chaveMensagem);
+    }
+
+    function ler(msgKey){
+      var msgRef = firebase.database().ref('mensagens/'+msgKey+'/');
+      msgRef.on('value', function(snapshot) {
+        console.log(snapshot.val());
+        console.log(snapshot.val().texto);
+      });
     }
   </script>
 </body>

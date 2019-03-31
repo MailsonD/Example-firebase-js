@@ -17,7 +17,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-messaging.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-functions.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-storage.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-storage.js"></script>
 
   <script>
   // Initialize Firebase
@@ -32,7 +32,8 @@
   var APP = firebase.initializeApp(config);
   
   var database = firebase.database();
-  console.log(database)  
+  console.log(database);
+  var usuarioLogado = prompt("Please enter your name", "Teste");  
 
 </script>
 <title id="title-page">Chat</title>
@@ -43,7 +44,7 @@
     <div class="row">
       <div class="col s4 offset-s7 msg-label">
         <div class="col s11 xs10">
-          <div class="label-username">Name</div>
+          <div class="label-username" id="nome"></div>
         </div>
         <div class="col s1 xs2">
           <a class="pointer red-text">
@@ -51,11 +52,11 @@
           </a>
         </div>
       </div>
-      <div class="msg-container col s4 offset-s7">
+      <div class="msg-container col s4 offset-s7" id="boxMsg">
 
         <div class="col m12 col s12">
           <div class="box-blue">
-            <img class="pull-right" ng-src="{{message.imageUrl}}" />
+            <img class="pull-right"/>
             <p>Content</p>
             <div>
               <strong>Invite</strong>&nbsp;
@@ -66,29 +67,7 @@
 
         <div class="col m12 col s12">
           <div class="box-gray">
-            <img class=" pull-left" ng-src="{{message.imageUrl}}" />
-            <p>Content</p>
-            <div>
-              <strong>Rudman</strong>&nbsp;
-              <span class="date">Fecha</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col m12 col s12">
-          <div class="box-blue">
-            <img class="pull-right" ng-src="{{message.imageUrl}}" />
-            <p>Content</p>
-            <div>
-              <strong>Invite</strong>&nbsp;
-              <span class="date">Fecha</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col m12 col s12">
-          <div class="box-gray">
-            <img class=" pull-left" ng-src="{{message.imageUrl}}" />
+            <img class=" pull-left"/>
             <p>Content</p>
             <div>
               <strong>Rudman</strong>&nbsp;
@@ -125,21 +104,25 @@
   <script src="static/jquery/jquery-3.1.0.min.js"></script>
   <script src="static/materialize/js/materialize.min.js"></script>
   <script type="text/javascript">
-    function escrever(msg) {
-      var chaveMensagem = firebase.database().ref().child('mensagens').push().key;
-      database.ref('mensagens/' + chaveMensagem).set({
-        texto : msg
+
+    nome.innerHTML = usuarioLogado;
+
+    function escrever(msg,usuario) {
+      var msgRef = firebase.database().ref().child('mensagens').push();
+      msgRef.set({
+        texto : msg,
+        usuario : usuario
       });
-      ler(chaveMensagem);
     }
 
-    function ler(msgKey){
-      var msgRef = firebase.database().ref('mensagens/'+msgKey+'/');
-      msgRef.on('value', function(snapshot) {
-        console.log(snapshot.val());
-        console.log(snapshot.val().texto);
-      });
-    }
+    firebase.database().ref().child('mensagens').on('child_added', function(snap) {
+      var novamensagem = snap.val(); //Nova mensagem recebida.
+      if(novamensagem.usuario == usuarioLogado){
+
+      }
+      console.log(novamensagem.texto,novamensagem.usuario);
+    });
+
   </script>
 </body>
 </html>

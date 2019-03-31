@@ -7,8 +7,35 @@
   <link href="static/materialize/css/materialize.min.css" type="text/css" rel="stylesheet"/>
   <link rel="stylesheet" type="text/css" href="static/materialize/material_icon/icon.css"/>
   <link href="static/css/index.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+  <!-- Firebase App is always required and must be first -->
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-app.js"></script>
 
-  <title id="title-page">Chat</title>
+  <!-- Add additional services that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-functions.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-storage.js"></script> -->
+
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCYNEdU59YkmL_PvjvEaZ8zYmI-ZgqQKQE",
+    authDomain: "testechat-caac4.firebaseapp.com",
+    databaseURL: "https://testechat-caac4.firebaseio.com",
+    projectId: "testechat-caac4",
+    storageBucket: "testechat-caac4.appspot.com",
+    messagingSenderId: "611292325942"
+  };
+  var APP = firebase.initializeApp(config);
+  var storage = firebase.storage();
+  console.log(storage);
+
+
+</script>
+<title id="title-page">Chat</title>
 </head>
 <body>
   <main></main>
@@ -71,7 +98,7 @@
         </div>
 
       </div>
-    
+
 
       <div class="col s4 offset-s7" style="padding-top: 1%;">
         <form>

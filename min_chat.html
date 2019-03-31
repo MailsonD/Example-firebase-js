@@ -30,9 +30,9 @@
     messagingSenderId: "611292325942"
   };
   var APP = firebase.initializeApp(config);
-  var storage = firebase.storage();
-  console.log(storage);
-
+  
+  var database = firebase.database();
+  console.log(database)  
 
 </script>
 <title id="title-page">Chat</title>
@@ -124,5 +124,13 @@
 
   <script src="static/jquery/jquery-3.1.0.min.js"></script>
   <script src="static/materialize/js/materialize.min.js"></script>
+  <script type="text/javascript">
+    function escrever(msg) {
+      var chaveMensagem = firebase.database().ref().child('mensagens').push().key;
+      database.ref('mensagens/' + chaveMensagem).set({
+        texto : msg
+      });
+    }
+  </script>
 </body>
 </html>

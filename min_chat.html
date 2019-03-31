@@ -54,27 +54,7 @@
       </div>
       <div class="msg-container col s4 offset-s7" id="boxMsg">
 
-        <div class="col m12 col s12">
-          <div class="box-blue">
-            <img class="pull-right"/>
-            <p>Content</p>
-            <div>
-              <strong>Invite</strong>&nbsp;
-              <span class="date">Fecha</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col m12 col s12">
-          <div class="box-gray">
-            <img class=" pull-left"/>
-            <p>Content</p>
-            <div>
-              <strong>Rudman</strong>&nbsp;
-              <span class="date">Fecha</span>
-            </div>
-          </div>
-        </div>
+        
 
       </div>
 
@@ -118,7 +98,27 @@
     firebase.database().ref().child('mensagens').on('child_added', function(snap) {
       var novamensagem = snap.val(); //Nova mensagem recebida.
       if(novamensagem.usuario == usuarioLogado){
-
+        boxMsg.innerHTML += "<div class='col m12 col s12'>"+
+                              "<div class='box-blue'>"+
+                                "<img class='pull-right'/>"+
+                                "<p>"+novamensagem.texto+"</p>"+
+                                "<div>"+
+                                  "<strong>"+novamensagem.usuario+"</strong>"+
+                                  "<span class='date'> Recived</span>"+
+                               "</div>"+
+                              "</div>"+
+                            "</div>";
+      }else{
+        boxMsg.innerHTML += "<div class='col m12 col s12'>"+
+                              "<div class='box-gray'>"+
+                                "<img class='pull-left'/>"+
+                                "<p>"+novamensagem.texto+"</p>"+
+                                "<div>"+
+                                  "<strong>"+novamensagem.usuario+"</strong>"+
+                                  "<span class='date'> Recived</span>"+
+                                "</div>"+
+                              "</div>"+
+                            "</div>";
       }
       console.log(novamensagem.texto,novamensagem.usuario);
     });
